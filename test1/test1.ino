@@ -31,7 +31,7 @@ int range[JOINT_COUNT][2] = {
 
 void setPWM(int servo, int val)
 {
-  val = constrain(val, range[servo][0], range[servo][1]);
+  val = map(val, 0, 255, range[servo][0], range[servo][1]);
   pwm.setPWM(servo, 0, map(val, 0, 255, SERVO_MIN, SERVO_MAX));
 }
 
@@ -42,7 +42,7 @@ void setPosition(int arr[])
   }  
 }
 
-int val[] = { 0, 0, 0, 0, 0 };
+int val[] = { 255, 0, 181, 181, 186 };
 void setPositionCommand() {
   char *arg;
 
@@ -69,8 +69,7 @@ void setup() {
   Serial.println("Servo arm control!");
   pwm.begin();
   pwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
-  int def_pos[] = { 0, 0, 0, 0, 0 };
-  setPosition(def_pos);
+  setPosition(val);
   
   SCmd.addCommand("P", setPositionCommand);
   SCmd.setDefaultHandler(doesnotexist);
