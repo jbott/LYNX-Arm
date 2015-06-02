@@ -5,6 +5,8 @@ struct servo_calibration {
   int pwm_range;
   int angle_center;
   int angle_range;
+  int angle_constrain_min = 0;
+  int angle_constrain_max = 0;
 };
 
 class AngleServo {

@@ -10,8 +10,17 @@ AngleServo::AngleServo(Adafruit_PWMServoDriver *pwm, const int index, const serv
 void
 AngleServo::setAngle(const int val)
 {
-  setRaw(map(
-    constrain(val, calibration.angle_center - calibration.angle_range, calibration.angle_center + calibration.angle_range),
+  int newval;
+  if (calibration.angle_constrain_min != 0 || calibration.angle_constrain_max != 0) {
+    newval = constrain(val,
+    calibration.angle_constrain_min,
+    calibration.angle_constrain_max);
+  } else {
+    newval = constrain(val,
+    calibration.angle_center - calibration.angle_range,
+    calibration.angle_center + calibration.angle_range);
+  }
+  setRaw(map(newval,
     calibration.angle_center - calibration.angle_range, calibration.angle_center + calibration.angle_range,
     calibration.pwm_center - calibration.pwm_range,
     calibration.pwm_center + calibration.pwm_range
