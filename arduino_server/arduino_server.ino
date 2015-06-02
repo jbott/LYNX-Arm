@@ -94,6 +94,7 @@ void doesnotexist(const char *command) {
 
 void init_servos()
 {
+  /*==== BASE ====*/
   servo_calibration c_base;
   c_base.pwm_center = 320;
   c_base.pwm_range = 320 - 170;
@@ -101,7 +102,9 @@ void init_servos()
   c_base.angle_range = 80;
 
   servos[SERVO_BASE] = new AngleServo(&pwm, PWM_BASE, c_base);
-  
+  servos[SERVO_BASE]->setAngle(90);
+
+  /*==== SHOULDER ====*/
   servo_calibration c_shoulder;
   c_shoulder.pwm_center = 320;
   c_shoulder.pwm_range = 320 - 170;
@@ -109,6 +112,29 @@ void init_servos()
   c_shoulder.angle_range = 90;
 
   servos[SERVO_SHOULDER] = new AngleServo(&pwm, PWM_SHOULDER, c_shoulder);
+  servos[SERVO_SHOULDER]->setAngle(90);
+
+  /*==== ELBOW ====*/
+  servo_calibration c_elbow;
+  c_elbow.pwm_center = 320;
+  c_elbow.pwm_range = -(320 - 170);
+  c_elbow.angle_center = 90;
+  c_elbow.angle_range = 90;
+
+  servos[SERVO_ELBOW] = new AngleServo(&pwm, PWM_ELBOW, c_elbow);
+  servos[SERVO_ELBOW]->setAngle(90);
+
+  /*==== WRIST ====*/
+  servo_calibration c_wrist;
+  c_wrist.pwm_center = 320;
+  c_wrist.pwm_range = -(320 - 170);
+  c_wrist.angle_center = 180;
+  c_wrist.angle_range = -90;
+  c_wrist.angle_constrain_min = 90;
+  c_wrist.angle_constrain_max = 270;
+
+  servos[SERVO_WRIST] = new AngleServo(&pwm, PWM_WRIST, c_wrist);
+  servos[SERVO_WRIST]->setAngle(90);
 }
 
 void setup() {
