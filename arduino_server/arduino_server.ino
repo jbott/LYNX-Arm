@@ -44,19 +44,6 @@ void setPositionCommand() {
     if (servos[i] != NULL)
       servos[i]->set(atoi(arg));
   }
-
-  Serial.print("SP");
-  for (int i=0; i < SERVO_COUNT; i++) {
-    
-    if (servos[i] != NULL) {
-      Serial.print(" ");
-      Serial.print(i);
-      Serial.print(":");
-      Serial.print(servos[i]->get());
-
-    }
-  }
-  Serial.println();
 }
 
 void setAngleCommand() {
@@ -73,19 +60,6 @@ void setAngleCommand() {
     if (servos[i] != NULL)
       servos[i]->setAngle(atoi(arg));
   }
-  
-  Serial.print("SA");
-  for (int i=0; i < SERVO_COUNT; i++) {
-    
-    if (servos[i] != NULL) {
-      Serial.print(" ");
-      Serial.print(i);
-      Serial.print(":");
-      Serial.print(servos[i]->getAngle());
-
-    }
-  }
-  Serial.println();
 }
 
 void doesnotexist(const char *command) {
@@ -143,7 +117,7 @@ void setup() {
 
   pwm.begin();
   pwm.setPWMFreq(50);
-  
+
   init_servos();
 
   SCmd.addCommand("P", setPositionCommand);
