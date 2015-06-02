@@ -30,6 +30,19 @@ enum servo_joint {
 
 AngleServo *servos[SERVO_COUNT];
 
+void getPositionCommand() {
+  Serial.print("GP");
+  for (int i=0; i < SERVO_COUNT; i++) {
+    if (servos[i] != NULL) {
+      Serial.print(" ");
+      Serial.print(i);
+      Serial.print(":");
+      Serial.print(servos[i]->get());
+    }
+  }
+  Serial.println();
+}
+
 void setPositionCommand() {
   char *arg;
 
@@ -44,6 +57,19 @@ void setPositionCommand() {
     if (servos[i] != NULL)
       servos[i]->set(atoi(arg));
   }
+}
+
+void getAngleCommand() {
+  Serial.print("GA");
+  for (int i=0; i < SERVO_COUNT; i++) {
+    if (servos[i] != NULL) {
+      Serial.print(" ");
+      Serial.print(i);
+      Serial.print(":");
+      Serial.print(servos[i]->getAngle());
+    }
+  }
+  Serial.println();
 }
 
 void setAngleCommand() {
@@ -109,6 +135,18 @@ void init_servos()
 
   servos[SERVO_WRIST] = new AngleServo(&pwm, PWM_WRIST, c_wrist);
   servos[SERVO_WRIST]->setAngle(90);
+
+  /*==== GRIPPER ====*/
+  servo_calibration c_gripper;
+  c_gripper.pwm_center = 320;
+  c_gripper.pwm_range = (320 - 170);
+  c_gripper.angle_center = 0;
+  c_gripper.angle_range = 90;
+  c_gripper.angle_constrain_min = 0;
+  c_gripper.angle_constrain_max = 60;
+
+  servos[SERVO_GRIPPER] = new AngleServo(&pwm, PWM_GRIPPER, c_gripper);
+  servos[SERVO_GRIPPER]->setAngle(40);
 }
 
 void setup() {
@@ -121,7 +159,9 @@ void setup() {
   init_servos();
 
   SCmd.addCommand("P", setPositionCommand);
+  SCmd.addCommand("GP", getPositionCommand);
   SCmd.addCommand("A", setAngleCommand);
+  SCmd.addCommand("GA", getAngleCommand);
   SCmd.setDefaultHandler(doesnotexist);
 
   Serial.println("READY");
