@@ -126,7 +126,7 @@ void init_servos()
 
   /*==== WRIST ====*/
   servo_calibration c_wrist;
-  c_wrist.pwm_center = 320;
+  c_wrist.pwm_center = 310;
   c_wrist.pwm_range = -(320 - 170);
   c_wrist.angle_center = 180;
   c_wrist.angle_range = -90;
@@ -134,7 +134,7 @@ void init_servos()
   c_wrist.angle_constrain_max = 270;
 
   servos[SERVO_WRIST] = new AngleServo(&pwm, PWM_WRIST, c_wrist);
-  servos[SERVO_WRIST]->setAngle(90);
+  servos[SERVO_WRIST]->setAngle(180);
 
   /*==== GRIPPER ====*/
   servo_calibration c_gripper;
@@ -146,7 +146,7 @@ void init_servos()
   c_gripper.angle_constrain_max = 60;
 
   servos[SERVO_GRIPPER] = new AngleServo(&pwm, PWM_GRIPPER, c_gripper);
-  servos[SERVO_GRIPPER]->setAngle(40);
+  servos[SERVO_GRIPPER]->setAngle(0);
 }
 
 void setup() {
