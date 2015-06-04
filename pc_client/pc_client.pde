@@ -31,10 +31,10 @@ void setup()
   in[2] = new RadialInput( XPADDING, YROW_HEIGHT * 2, WIDGET_WIDTH, WIDGET_HEIGHT );
   in[2].setTitle("ELBOW");
 
-  in[3] = new RadialInput( W_WIDTH - XPADDING, YROW_HEIGHT * 2, WIDGET_WIDTH, WIDGET_HEIGHT );
+  in[3] = new RadialInput( 90.0, 270.0, 180.0, W_WIDTH - XPADDING, YROW_HEIGHT * 2, WIDGET_WIDTH, WIDGET_HEIGHT );
   in[3].setTitle("WRIST");
 
-  in[4] = new RadialInput( XPADDING, YROW_HEIGHT * 3, WIDGET_WIDTH, WIDGET_HEIGHT );
+  in[4] = new RadialInput( 0.0, 60.0, 0.0, XPADDING, YROW_HEIGHT * 3, WIDGET_WIDTH, WIDGET_HEIGHT );
   in[4].setTitle("GRIPPER");
 
   // Create COM port list
