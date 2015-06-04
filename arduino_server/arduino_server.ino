@@ -116,7 +116,7 @@ void init_servos()
 
   /*==== ELBOW ====*/
   servo_calibration c_elbow;
-  c_elbow.pwm_center = 320;
+  c_elbow.pwm_center = 310;
   c_elbow.pwm_range = -(320 - 170);
   c_elbow.angle_center = 90;
   c_elbow.angle_range = 90;
