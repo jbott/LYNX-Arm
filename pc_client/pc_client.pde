@@ -124,6 +124,11 @@ void initSerial(String port) {
   serial = new Serial(this, port, 9600);
 }
 
+void serialEvent(Serial p) {
+  String str = p.readString();
+  println(str);
+}
+
 void writeSerial( int ... pos )
 {
   // Assemble command
